@@ -1,0 +1,17 @@
+****Transform a BST to greater sum tree: Given a BST, transform it into greater sum 	tree where each node contains sum of all nodes greater than that node.
+	-> Recur the tree in reverse inorder fashion, means right -> root -> left
+		bcz the right node is > than the root, and while backtracking, keep
+		adding the value of the right node to "sum" and add it to the current node.
+		
+	-> the recursion will look like
+		func(Node root, int* sum){
+			..
+			func(root.right, sum)
+			
+			root.data = *sum;
+			*sum += root.data
+			
+			func(root.left, sum)
+			
+			..
+		}

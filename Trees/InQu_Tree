@@ -1,0 +1,29 @@
+***Print left view of a binary tree:
+	             1
+               /   \
+              2     3
+             / \     \
+            4   5     6             
+	Output : 1 2 4
+	
+	-> Do a simple inorder traversal of the tree and keep a variable max_level
+	to store the max_level that has been visited. If the current level is less than
+	max_level, then print the node. Since it's inorder traversal, the left node 
+	will get printed automatically.
+	
+	static int max_lev;
+	
+	func(Node root, int curr_lev){
+		..
+		
+		if(curr_lev > max_lev){
+			print(root.data)
+			max_lev = curr_lev
+		}
+		
+		func(root.left)
+		func(root.right)
+		..
+	}
+	
+***P
