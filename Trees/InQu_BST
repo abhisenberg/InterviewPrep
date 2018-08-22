@@ -15,3 +15,60 @@
 			
 			..
 		}
+
+
+****Check if a tree is BST: Given a binary tree, return true if it is BST, else false.
+	-> Keep track of MIN and MAX element found till now in the tree, while going LEFT : change only MAX = Current node value. While going RIGHT : change only MIN = Current node value.
+
+	-> Recursion will look like
+		boolean check(Node node, int max, int min){
+	        if(node == null){
+	            return true;
+	        }
+	        
+	        if(node.left != null){
+	            if(node.left.data > node.data
+	                || node.left.data < min){
+	                return false;
+	            }
+	            
+	            if(!check(node.left, node.data, min))
+	                return false;
+	        }
+	        
+	        if(node.right != null){
+	            if(node.right.data < node.data
+	                || node.right.data > max){
+	                return false;
+	            }
+	            
+	            if(!check(node.right, min, node.data))
+	                return false;
+	        }
+	        
+	        return true;
+    	}
+
+****Check root-to-leaf path sum: check whether there is a root to leaf path in that tree with a given sum.
+	-> Keep a track of the path sum by supplying a sum variable
+	and check for leaf in the way: if(node.left== null && node.right == null). If true, compare target and current sum, if equal, return true else false;
+
+	-> Recursion will be like
+	 boolean func(Node node, int target, int sum){
+        if(node == null){
+            return false;
+        }
+    
+        sum += node.data;
+        
+        if(node.left == null && node.right == null){
+            if(sum == target){
+                return true;
+            }
+            return false;
+        }
+        
+        return func(node.left, target, sum)
+            || func(node.right, target, sum);
+    }
+

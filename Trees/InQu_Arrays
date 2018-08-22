@@ -21,4 +21,35 @@
 		Since prefix sum 1 repeats, we have a subarray
 		with 0 sum. 
 		
-***
+***Return n'th node from end of linked list:
+
+	-> Use two pointers. Both pointers are initialized to head. First pointers moves forwards till the count becomes n from the front. Then the other pointer and the first pointer start moving simultaneously. This keeps on going till the first pointer becomes null. At this point the second pointer will be at the desired node.
+
+***Get the intersection point of two Linked Lists.
+There are two singly linked lists in a system. By some programming error, the end node of one of the linked list got linked to the second list, forming a Y shaped list. Write a program to get the point where two linked list merge.
+
+	Given LL is like this: 3 -- 6 -- 9 -- 15 -- 30
+							  10 -- 11 -- /
+			Here the intersection is 15.
+
+		-> 
+		1) Get count of the nodes in the first list, let count be c1.
+		2) Get count of the nodes in the second list, let count be c2.
+		3) Get the difference of counts d = abs(c1 – c2)
+		4) Now traverse the bigger list from the first node till d nodes so that from here onwards both the lists have equal no of nodes.
+		5) Then we can traverse both the lists in parallel till we come across a common node. (Note that getting a common node is done by comparing the address of the nodes)		
+
+***Detect and remove loop in a LL:
+checks whether a given Linked List contains loop and if loop is present then removes the loop and returns true.
+	Input: 1--2--3
+			  |  |
+		      5--4
+
+	Output: 1--2--3--4--5
+
+	    ->
+		1) Detect Loop using Floyd’s Cycle detection algo and get the pointer to a loop node.
+		2) Count the number of nodes in loop. Let the count be k.
+		3) Fix one pointer to the head and another to kth node from head.
+		4) Move both pointers at the same pace, they will meet at loop starting node.
+		5) Get pointer to the last node of loop and make next of it as NULL.
