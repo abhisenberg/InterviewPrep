@@ -3,6 +3,11 @@ import java.io.*;
 
 public class LIncSubsq {
 
+	/*
+	 Length of LIS for 
+	{ 10, 22, 9, 33, 21, 50, 41, 60, 80 } is 6 and LIS is {10, 22, 33, 50, 60, 80}.
+	*/
+	
 	public static void main(String[] args){
 		ShortScan sc = new ShortScan();
 		int[] arr = {3,8,4,3,5,2,6,9};
@@ -19,7 +24,7 @@ public class LIncSubsq {
 		for(int i=1; i<arr.length; i++){
 			for(int j=0; j<i; j++){
 				if(arr[j] < arr[i] && lis_len[j]+1 > lis_len[i]){
-					lis_len[i]	= lis_len[j]+1;
+					lis_len[i]  = lis_len[j]+1;
 					lis_indx[i] = j;
 				}
 			}
