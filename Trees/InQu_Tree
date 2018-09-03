@@ -111,10 +111,14 @@
 		}
 
 ***Binary tree to DLL
-Given a Binary Tree (BT), convert it to a Doubly Linked List(DLL) In-Place. The left and right pointers in nodes are to be used as previous and next pointers respectively in converted DLL. The order of nodes in DLL must be same as Inorder of the given Binary Tree. 
+Given a Binary Tree (BT), convert it to a Doubly Linked List(DLL) In-Place. 
+he left and right pointers in nodes are to be used as previous and next pointers
+respectively in converted DLL.
+The order of nodes in DLL must be same as Inorder of the given Binary Tree. 
 
-	-> The idea is to keep track of a global prev node during the inorder traversal and a current node.
-	then, curr.left = prev AND prev.right = curr
+	-> The idea is to keep track of a global prev node
+	during the inorder traversal and a current node.
+	then, curr.left = prev AD prev.right = curr
 	The code will be as follows:
 
 	(global) Node prev;
@@ -153,8 +157,10 @@ Given a Binary Tree (BT), convert it to a Doubly Linked List(DLL) In-Place. The 
 	    / \   \   
 	   4-->1-->2-->NULL
 
-	There is third pointer in each node named 'nextRight', which is to be connected to the next node in level order traversal. 
-	The idea is to keep connecting each node in a level unless there are nodes of that level available, for this we check for sz > 0;
+	There is third pointer in each node named 'nextRight', which is to be connected
+	to the next node in level order traversal. 
+	The idea is to keep connecting each node in a level unless
+	there are nodes of that level available, for this we check for sz > 0;
 	Exactly same as level order, just one line added.
 
 	void connect(Node root)
