@@ -10,6 +10,7 @@ public class mergesort {
 		for(int i=0; i<n; i++){
 			arr[i] = sc.ni();
 		}
+
 		arr = mergesort(arr, 0 , arr.length-1);
 		show(arr);
 	}

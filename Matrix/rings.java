@@ -1,11 +1,35 @@
 import java.util.*;
 import java.io.*;
 
-public class Template {
+public class rings {
+/*
+	Make rings like matrix like, with input n
+	Input : N = 4
+	Output : 4 4 4 4 4 4 4
+	         4 3 3 3 3 3 4
+	         4 3 2 2 2 3 4
+	         4 3 2 1 2 3 4
+	         4 3 2 2 2 3 4
+	         4 3 3 3 3 3 4
+	         4 4 4 4 4 4 4
+
+	Input : N = 2
+	Output : 2 2 2
+	         2 1 2
+	         2 2 2
+
+*/
 
 	public static void main(String[] args){
 		ShortScan sc = new ShortScan();
-		
+		int n = sc.ni();
+		for(int i=(1-n); i<n; i++){
+			for(int j=(1-n); j<n; j++){
+				int val = 1 + Math.max(Math.abs(i), Math.abs(j));
+				p(val+" ");
+			}
+			po("");
+		}
 	}
 
 

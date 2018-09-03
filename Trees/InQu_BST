@@ -72,3 +72,20 @@
             || func(node.right, target, sum);
     }
 
+
+****LCA of a BST: Given two numbers n1 and n2, find their lca if it is guarabteed that they exist in bst
+
+	-> If both n1 and n2 are smaller than root data, then search for lca in left node. If both are greater than search in right node. Else return the current node, bcz it means that one is in left side and the other is in right side, hence the current node is lca.
+
+	Node lca(Node node, int n1, int n2) 
+    {
+        if(node == null) return null;
+        
+        if(n1 < node.data && n2 < node.data)
+            return lca(node.left, n1, n2);
+        
+        if(n1 > node.data && n2 > node.data)
+            return lca(node.right, n1, n2);
+            
+        return node;
+    }

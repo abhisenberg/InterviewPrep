@@ -26,4 +26,193 @@
 		..
 	}
 	
-***P
+***Print Boundary view of a binary tree: (anticlockwise perimeter)
+	             1
+               /   \
+              2     3
+             / \     \
+            4   5     6 
+               / \     \
+              7   8     9
+
+     Output: 1 2 4 7 8 9 6 3
+
+     -> The main function is non recursive, all util funcs are recursive
+
+    void bondary(Node node){
+     	..
+     	print node.data
+
+     	leftBoundary(node.1eft)
+     	
+     	leaves(node.left)
+     	leaves(node.right)
+
+     	rightBoundary(node.right)
+     	..
+     }
+
+    void leftB(Node node){
+	    if(node != null){
+	        
+	        if(node.left != null){
+
+	            p(node.data+" ");
+	            leftB(node.left);
+	        } else if (node.right != null) {
+
+	            p(node.data+" ");
+	            leftB(node.right);
+	        }
+	    }
+	}
+	
+	void rightB(Node node){
+	    if(node != null){
+
+	        if(node.right != null){
+
+	            rightB(node.right);
+	            p(node.data+" ");
+	        } else if (node.left != null) {
+
+	            rightB(node.left);
+	            p(node.data+" ");
+	        }
+	        
+	    }
+	}
+	
+	void leaves(Node node){
+	    if(node == null){
+	        return;
+	    }
+	    
+	    if(node.left == null && node.right == null){
+	        p(node.data+" ");
+	    }
+	    
+	    leaves(node.left);
+	    leaves(node.right);
+	}
+
+
+***Mirror Tree
+	-> The idea is to swap the left and right nodes recursivley
+
+	Recursion is like:
+		void func(Node node){
+			..
+			mirror(node.left)
+			mirror(node.right)
+
+			swap(node.left, node.right)
+			..
+		}
+
+***Binary tree to DLL
+Given a Binary Tree (BT), convert it to a Doubly Linked List(DLL) In-Place. The left and right pointers in nodes are to be used as previous and next pointers respectively in converted DLL. The order of nodes in DLL must be same as Inorder of the given Binary Tree. 
+
+	-> The idea is to keep track of a global prev node during the inorder traversal and a current node.
+	then, curr.left = prev AND prev.right = curr
+	The code will be as follows:
+
+	(global) Node prev;
+
+	void func(Node node){
+        if(node == null) return;
+        
+        func(node.left);
+        
+        //prev null means this is the first node in
+        //inorder traversal, hence make it head.
+        if(prev == null){
+            head = node;
+        } else {
+            prev.right = node;
+            node.left = prev;
+        }
+        prev = node;
+        
+        func(node.right);
+    }
+
+***Connect nodes at same level
+	Input Tree
+	       10
+	      / \
+	     3   5
+	    / \   \
+	   4   1   2
+
+
+	Output Tree
+	       10--->NULL
+	      / \
+	     3-->5-->NULL
+	    / \   \   
+	   4-->1-->2-->NULL
+
+	There is third pointer in each node named 'nextRight', which is to be connected to the next node in level order traversal. 
+	The idea is to keep connecting each node in a level unless there are nodes of that level available, for this we check for sz > 0;
+	Exactly same as level order, just one line added.
+
+	void connect(Node root)
+    {
+        while(!q.isEmpty()){
+            int sz = q.size();
+            
+            while(sz-- > 0){
+                Node cn = q.poll();
+                
+                //This is the block doing all the work
+                if(sz > 0){
+                    cn.nextRight = q.peek();
+                }
+                
+                if(cn.left != null) q.add(cn.left);
+                if(cn.right != null) q.add(cn.right);
+            }
+        }
+    }
+
+
+***Check if two trees are identical
+	   	boolean isIdentical(Node n1, Node n2)
+		{
+			if(n1 == null && n2 == null) return true;
+			
+			if(n1 == null || n2 == null) return false;
+			
+			return isIdentical(n1.left, n2.left)
+			    && isIdentical(n1.right, n2.right)
+			    && (n1.data == n2.data);
+		}
+
+***Check if a tree is balanced: A tree is balanced if the height difference
+of left and right subtrees is not greater than 1.
+
+	-> Keep traversing the tree and calculating heights at the same time,
+	if at any point the height is unbalanced then return -1 and subsequently
+	keep returning -1. Else, return the height of the present tree by
+	max(left_h, right_h)+1.
+
+
+		int isBal(Node node){
+			
+			if(node == null)
+				return 0
+
+			int lh = isBal(node.left)+1
+			int rh = isBal(node.right)+1
+
+			if(lh != -1 && rh != -1 && abs(lh-rh) <= 1)
+				return max(lh, rh)+1
+
+			else 
+				return -1
+		}
+
+		if the final returned value is -1 then it is not balanced, otherwise
+		it is.
+		

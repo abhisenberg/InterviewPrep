@@ -21,9 +21,13 @@
 		Since prefix sum 1 repeats, we have a subarray
 		with 0 sum. 
 		
+
+
 ***Return n'th node from end of linked list:
 
 	-> Use two pointers. Both pointers are initialized to head. First pointers moves forwards till the count becomes n from the front. Then the other pointer and the first pointer start moving simultaneously. This keeps on going till the first pointer becomes null. At this point the second pointer will be at the desired node.
+
+
 
 ***Get the intersection point of two Linked Lists.
 There are two singly linked lists in a system. By some programming error, the end node of one of the linked list got linked to the second list, forming a Y shaped list. Write a program to get the point where two linked list merge.
@@ -39,6 +43,8 @@ There are two singly linked lists in a system. By some programming error, the en
 		4) Now traverse the bigger list from the first node till d nodes so that from here onwards both the lists have equal no of nodes.
 		5) Then we can traverse both the lists in parallel till we come across a common node. (Note that getting a common node is done by comparing the address of the nodes)		
 
+
+
 ***Detect and remove loop in a LL:
 checks whether a given Linked List contains loop and if loop is present then removes the loop and returns true.
 	Input: 1--2--3
@@ -53,3 +59,95 @@ checks whether a given Linked List contains loop and if loop is present then rem
 		3) Fix one pointer to the head and another to kth node from head.
 		4) Move both pointers at the same pace, they will meet at loop starting node.
 		5) Get pointer to the last node of loop and make next of it as NULL.
+
+***Count inversions in array:
+Use merge sort and keep a variable 'inv_cnt' that will store the value of numbers that need to be swapped. 
+This is done in the 'mergeTwoSortedArrays()' where we merge the 2 sorted arrays. Suppose 'i' is the counter for left array and 'j' is the counter for right array, then if arr[i] > arr[j], then all the further elements in left side upto 'mid' are > arr[j], hence they all need to be swapped. Therefore, when we encounter arr[i] > arr[j], increment inv_cnt by (mid - i);
+
+Pseudo code is as follows:
+	
+	ms_invcnt(arr[], int left, int right){
+		mid = (left+right)/2
+
+		int left_inv = ms_invcnt(arr left half)
+		int right_inv = ms_invcnt(arr right half)
+-		int combined = mergeSorted_invcnt(arr,left, mid, right)
+		return left_inv + right_inv + combined
+	}
+
+	mergeSorted_invcnt(arr[], int left, int mid, int right){
+		...
+		int i = left, j = mid+1
+		int inv_cnt = 0
+
+		while( (i<=mid) && (j<right) ){
+			if(arr[i] > arr[j]){
+				...
+				inv_cnt += (mid - i);
+				...
+			}
+		}
+		...
+	}
+
+***Kadanes algo: Given an array containing both negative and positive integers. Find the contiguous sub-array with maximum sum.
+
+	int maxSubArraySum(int a[], int size)
+	{
+	   int max_so_far = a[0];
+	   int curr_max = a[0];
+	 
+	   for (int i = 1; i < size; i++)
+	   {
+	        curr_max = max(a[i], curr_max+a[i]);
+	        max_so_far = max(max_so_far, curr_max);
+	   }
+	   return max_so_far;
+	}
+
+***Sort an array of 0s, 1s, 2s
+	Take three pointers: z (denotes the position of zero), i (current element), t (denotes the position of two)
+
+	z = 0, i = 0, t = arr.length-1
+	while(i <= t){
+		if (arr[i] == 0){
+			swap(arr[i], arr[z])
+			i++
+			z++
+		}
+		else if (arr[i] == 1){
+			i++
+		}
+		else {
+			swap(arr[i], arr[t])
+			t--
+		}
+	}
+
+***Find max j-i where arr[j] > arr[i]
+	We construct two auxiliary arrays LMin[] and RMax[] such that LMin[i]
+	holds the smallest element on left side of arr[i] including arr[i],
+	and RMax[j] holds the greatest element on right side of arr[j]
+	including arr[j]. After constructing these two auxiliary arrays,
+	we traverse both of these arrays from left to right. While traversing
+	LMin[] and RMa[] if we see that LMin[i] is greater than RMax[j],
+	then we must move ahead in LMin[] (or do i++) because all elements
+	on left of LMin[i] are greater than or equal to LMin[i].
+	Otherwise we must move ahead in RMax[j] to look for a greater
+	j – i value.
+
+	After constructing both the arrays, traversing both:
+
+	i = 0, j = 0
+	while (j < n && i < n) 
+        {
+            if (LMin[i] < RMax[j]) 
+            {
+                maxDiff = max(maxDiff, j - i);
+                j = j + 1;
+            } 
+            else
+                i = i + 1;
+        }
+ 
+    return maxDiff;
