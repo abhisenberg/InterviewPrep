@@ -1,4 +1,5 @@
-****Transform a BST to greater sum tree: Given a BST, transform it into greater sum 	tree where each node contains sum of all nodes greater than that node.
+****Transform a BST to greater sum tree: Given a BST, transform it into greater sum
+tree where each node contains sum of all nodes greater than that node.
 	-> Recur the tree in reverse inorder fashion, means right -> root -> left
 		bcz the right node is > than the root, and while backtracking, keep
 		adding the value of the right node to "sum" and add it to the current node.
@@ -18,7 +19,9 @@
 
 
 ****Check if a tree is BST: Given a binary tree, return true if it is BST, else false.
-	-> Keep track of MIN and MAX element found till now in the tree, while going LEFT : change only MAX = Current node value. While going RIGHT : change only MIN = Current node value.
+	-> Keep track of MIN and MAX element found till now in the tree,
+	while going LEFT : change only MAX = Current node value.
+	While going RIGHT : change only MIN = Current node value.
 
 	-> Recursion will look like
 		boolean check(Node node, int max, int min){
@@ -49,9 +52,11 @@
 	        return true;
     	}
 
-****Check root-to-leaf path sum: check whether there is a root to leaf path in that tree with a given sum.
+****Check root-to-leaf path sum: check whether there is a root to leaf path in that
+tree with a given sum.
 	-> Keep a track of the path sum by supplying a sum variable
-	and check for leaf in the way: if(node.left== null && node.right == null). If true, compare target and current sum, if equal, return true else false;
+	and check for leaf in the way: if(node.left== null && node.right == null).
+	If true, compare target and current sum, if equal, return true else false;
 
 	-> Recursion will be like
 	 boolean func(Node node, int target, int sum){
@@ -73,9 +78,13 @@
     }
 
 
-****LCA of a BST: Given two numbers n1 and n2, find their lca if it is guarabteed that they exist in bst
+****LCA of a BST: Given two numbers n1 and n2, find their lca if it is
+guarabteed that they exist in bst
 
-	-> If both n1 and n2 are smaller than root data, then search for lca in left node. If both are greater than search in right node. Else return the current node, bcz it means that one is in left side and the other is in right side, hence the current node is lca.
+	-> If both n1 and n2 are smaller than root data, then search for lca in left node.
+	If both are greater than search in right node. Else return the current node,
+	bcz it means that one is in left side and the other is in right side,
+	hence the current node is lca.
 
 	Node lca(Node node, int n1, int n2) 
     {
