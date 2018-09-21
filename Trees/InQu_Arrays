@@ -1,6 +1,4 @@
-***Find if there is a subarray with 0 sum: Given an array of positive
-and negative numbers, find if there is a subarray (of size at-least one)
-with 0 sum.
+***Find if there is a subarray with 0 sum: Given an array of positive and negative numbers, find if there is a subarray (of size at-least one) with 0 sum.
 
 	Input: {4, 2, -3, 1, 6}
 	Output: true 
@@ -27,18 +25,12 @@ with 0 sum.
 
 ***Return n'th node from end of linked list:
 
-	-> Use two pointers. Both pointers are initialized to head.
-	First pointers moves forwards till the count becomes n from the front.
-	Then the other pointer and the first pointer start moving simultaneously.
-	This keeps on going till the first pointer becomes null.
-	At this point the second pointer will be at the desired node.
+	-> Use two pointers. Both pointers are initialized to head. First pointers moves forwards till the count becomes n from the front. Then the other pointer and the first pointer start moving simultaneously. This keeps on going till the first pointer becomes null. At this point the second pointer will be at the desired node.
 
 
 
 ***Get the intersection point of two Linked Lists.
-There are two singly linked lists in a system. By some programming error,
-the end node of one of the linked list got linked to the second list,
-forming a Y shaped list. Write a program to get the point where two linked list merge.
+There are two singly linked lists in a system. By some programming error, the end node of one of the linked list got linked to the second list, forming a Y shaped list. Write a program to get the point where two linked list merge.
 
 	Given LL is like this: 3 -- 6 -- 9 -- 15 -- 30
 							  10 -- 11 -- /
@@ -48,19 +40,16 @@ forming a Y shaped list. Write a program to get the point where two linked list 
 		1) Get count of the nodes in the first list, let count be c1.
 		2) Get count of the nodes in the second list, let count be c2.
 		3) Get the difference of counts d = abs(c1 – c2)
-		4) Now traverse the bigger list from the first node till d
-		nodes so that from here onwards both the lists have equal no of nodes.
-		5) Then we can traverse both the lists in parallel till we come 
-		across a common node. (Note that getting a common node is done by comparing the address of the nodes)		
+		4) Now traverse the bigger list from the first node till d nodes so that from here onwards both the lists have equal no of nodes.
+		5) Then we can traverse both the lists in parallel till we come across a common node. (Note that getting a common node is done by comparing the address of the nodes)		
 
 
 
 ***Detect and remove loop in a LL:
-checks whether a given Linked List contains loop and if
-loop is present then removes the loop and returns true.
+checks whether a given Linked List contains loop and if loop is present then removes the loop and returns true.
 	Input: 1--2--3
-		|  |
-	 	5--4
+			  |  |
+		      5--4
 
 	Output: 1--2--3--4--5
 
@@ -72,14 +61,8 @@ loop is present then removes the loop and returns true.
 		5) Get pointer to the last node of loop and make next of it as NULL.
 
 ***Count inversions in array:
-Use merge sort and keep a variable 'inv_cnt' that will store the value of
-numbers that need to be swapped. 
-This is done in the 'mergeTwoSortedArrays()' where we merge
-the 2 sorted arrays. Suppose 'i' is the counter for left array
-and 'j' is the counter for right array, then if arr[i] > arr[j],
-then all the further elements in left side upto 'mid' are > arr[j],
-hence they all need to be swapped. Therefore, when we encounter arr[i] > arr[j],
-increment inv_cnt by (mid - i);
+Use merge sort and keep a variable 'inv_cnt' that will store the value of numbers that need to be swapped. 
+This is done in the 'mergeTwoSortedArrays()' where we merge the 2 sorted arrays. Suppose 'i' is the counter for left array and 'j' is the counter for right array, then if arr[i] > arr[j], then all the further elements in left side upto 'mid' are > arr[j], hence they all need to be swapped. Therefore, when we encounter arr[i] > arr[j], increment inv_cnt by (mid - i);
 
 Pseudo code is as follows:
 	
@@ -107,8 +90,7 @@ Pseudo code is as follows:
 		...
 	}
 
-***Kadanes algo: Given an array containing both negative and positive integers.
-Find the contiguous sub-array with maximum sum.
+***Kadanes algo: Given an array containing both negative and positive integers. Find the contiguous sub-array with maximum sum.
 
 	int maxSubArraySum(int a[], int size)
 	{
@@ -169,3 +151,121 @@ Find the contiguous sub-array with maximum sum.
         }
  
     return maxDiff;
+
+
+***Maximum difference between two elements such that larger element
+appears after the smaller number
+
+	In this method, instead of taking difference of the picked element
+	with every other element, we take the difference with the minimum
+	element found so far. So we need to keep track of 2 things:
+	1) Maximum difference found so far (max_diff).
+	2) Minimum number visited so far (min_element).
+
+		for (i = 1; i < arr_size; i++) 
+        {
+            if (arr[i] - min_element > max_diff)	
+                max_diff = arr[i] - min_element;
+            if (arr[i] < min_element)
+                min_element = arr[i];
+        }
+        return max_diff;
+
+***Stock buy sell to max profit
+	1. Find the local minima and store it as starting index. If not exists,
+	return.
+	2. Find the local maxima. and store it as ending index. If we reach the
+	end, set the end as ending index.
+	3. Update the solution (Increment count of buy sell pairs)
+	4. Repeat the above steps if end is not reached.
+
+	// Traverse through given price array
+    int i = 0;
+    while (i < n-1)
+    {
+        // Find Local Minima. Note that the limit is (n-2) as we are
+        // comparing present element to the next element. 
+        while ((i < n-1) && (price[i+1] <= price[i]))
+            i++;
+ 
+        // If we reached the end, break as no further solution possible
+        if (i == n-1)
+            break;
+ 
+        // Store the index of minima
+        sol[count].buy = i++;
+ 
+        // Find Local Maxima.  Note that the limit is (n-1) as we are
+        // comparing to previous element
+        while ((i < n) && (price[i] >= price[i-1]))
+            i++;
+ 
+        // Store the index of maxima
+        sol[count].sell = i-1;
+ 
+        // Increment count of buy/sell pairs
+        count++;
+    }
+
+
+***Minimum number of platforms needed: Given arrival and departure times of
+all trains that reach a railway station, find the minimum number of
+platforms required for the railway station so that no train waits.
+We are given two arrays which represent arrival and departure times
+of trains that stop.
+
+	Examples:
+
+	Input:  arr[]  = {9:00,  9:40, 9:50,  11:00, 15:00, 18:00}
+	        dep[]  = {9:10, 12:00, 11:20, 11:30, 19:00, 20:00}
+	Output: 3
+	There are at-most three trains at a time (time between 11:00 to 11:20) 
+
+	Solution:
+
+		arr[]  = {9:00,  9:40, 9:50,  11:00, 15:00, 18:00}
+	    dep[]  = {9:10, 12:00, 11:20, 11:30, 19:00, 20:00}
+
+		All events sorted by time.
+		Total platforms at any time can be obtained by subtracting total 
+		departures from total arrivals by that time.
+		 Time     Event Type     Total Platforms Needed at this Time                               
+		 9:00       Arrival                  1
+		 9:10       Departure                0
+		 9:40       Arrival                  1
+		 9:50       Arrival                  2
+		 11:00      Arrival                  3 
+		 11:20      Departure                2
+		 11:30      Departure                1
+		 12:00      Departure                0
+		 15:00      Arrival                  1
+		 18:00      Arrival                  2 
+		 19:00      Departure                1
+		 20:00      Departure                0
+
+		Minimum Platforms needed on railway station = Maximum platforms 
+		                                              needed at any time 
+		                                           = 3  
+
+***Given an array of integers, write a function that returns true if there is a triplet (a, b, c) that satisfies a2 + b2 = c2, in O(n^2)
+
+	-> The naive approach is to run 3 loops, for a, b and c. O(n^3)
+	-> Better solution is to first sort the array, then square all the terms
+	Now in this array, run the loop backwards, and check for any two numbers
+	in the interval index (0, c-1) and check if it satisfies the condition.
+
+	for(int c = n-1; c>=0; c--){
+		int a = 0, b = c-1;
+		
+		while(a < b){
+			if(a + b < c){
+				a++;
+			}
+			else if(a + b > c){
+				b--;
+			}
+			else {
+				found a, b and c
+			}
+		}
+	}
