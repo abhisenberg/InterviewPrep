@@ -80,6 +80,8 @@ public class LPalind {
 
 	/*
 	~~LP Substring~~: 
+	O(n^2) time
+	O(n^2) space
 	*/
 	public static int lpalSstring_bu(String s){
 		int[][] dp = new int[s.length()][s.length()];
@@ -126,6 +128,61 @@ public class LPalind {
 		po(s.substring(pi,pj+1));
 		return max;
 
+	}
+
+	/*
+	~~LP Substring~~: 
+	O(n^2) time
+	O(1) space
+
+	The idea is to generate all even length and odd length palindromes
+	and keep track of the longest palindrome seen so far.
+
+	To generate odd length palindrome:
+	Fix a centre and expand in both directions for longer palindromes.
+
+	To generate even length palindrome:
+	Fix two centre ( low and high ) and expand in both directions
+	for longer palindromes.
+	*/
+
+	public static String pal(String s){
+	    int ans = 1, bi = 0;
+	    
+	    int low, high;
+
+	    // One by one consider every character as center point of 
+    	// even and length palindromes
+
+	    for(int i=1; i<s.length(); i++){
+	        
+	        //For even palindromes:
+	        // Find the longest even length palindrome with center points
+        	// as i-1 and i. 
+	        low = i-1; high = i;
+	        while(low >= 0 && high < s.length() && s.charAt(low) == s.charAt(high)){
+	                if(ans < high-low+1){
+	                    ans = high-low+1;
+	                    bi = low;
+	                }
+	                low--;
+	                high++;
+	        }
+	        
+	        //For odd palindromes
+	        // Find the longest odd length palindrome with center 
+        	// point as i
+	        low = i; high = i;
+	        while(low >= 0 && high < s.length() && s.charAt(low)== s.charAt(high)){
+	                if(ans < high-low+1){
+	                    ans = high-low+1;
+	                    bi = low;
+	                }
+	                low--;
+	                high++;
+	       }
+	    }
+	    return s.substring(bi, bi+ans);
 	}
 
 
