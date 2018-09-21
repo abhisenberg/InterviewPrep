@@ -246,7 +246,13 @@ public class Traversals {
 
 	public static void inOrder_it(Node n){
 		Stack<Node> s = new Stack<>();
-		
+		/*
+		First push all the left side nodes one by one in the stack, so that the
+		left-est leaf node is the first to popup.
+		Then one by one pop (and print) the nodes from the stack, and check if they have a right
+		node, if they do, traverse all the left nodes of that right node and keep pushing
+		them in the stack. Repeat all this process untill the stack is empty.
+		*/
 		while(n != null){
 			s.push(n);
 			n = n.left;
