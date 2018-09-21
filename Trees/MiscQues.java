@@ -341,7 +341,15 @@ public class MiscQues {
 				return true;
 			}
 
-
+			/*
+			First add the current node in the path, assuming that this node is in the
+			path that leads to the target. Then traverse further nodes from here.
+			If none of the left or right subtree from this node reach the target (if they do then
+			they will return true, otherwise false) then it means that the current node also
+			shouldn't be in the ancestral-path.
+			Hence, if we get false from both left and right subtree, we will remove the current node,
+			and return false.
+			*/
 			path.add(node.data);
 
 			if(ancestors(node.left, target, path))
