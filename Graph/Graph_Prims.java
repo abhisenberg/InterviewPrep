@@ -59,6 +59,23 @@ class Graph_Prims
 	 	po(s);
 	 	return s;         
       }
+
+/************************************************************************************************************************/
+		 /*
+		 The difference between Dijkstra and Prims is only in the relaxation step:
+		 
+		 In Prims
+		 If node_in_mst(v)=false and graph[u][v] < dist[v] :
+			dist[v] = graph[u][v]
+		 Note here , We are just updating the distance of v with the minimum neighbor edge weight.
+		 
+		 
+		 In Dijkstra
+		 if node_in_shortest_path_set(v)=false and dist[u]+ graph[u][v] < dist[v]:
+			dist[v] = dist[u] + graph[u][v]
+		 Note here , We are updating the distance of v
+		 with the minimum neighbor edge weight + distance of source.
+		 */
       
       public void prims(int src)
       {
