@@ -1,6 +1,15 @@
 import java.util.*;
 import java.lang.*;
 
+	/*
+	Given a graph and a source vertex src in graph, find shortest paths from SRC TO ALL VERTICES in the given graph.
+	The graph may contain negative weight edges.
+	Dijkstra doesn’t work for Graphs with negative weight edges, Bellman-Ford works for such graphs.
+	Dijksra’s algorithm is a Greedy algorithm and time complexity is O(VLogV) (with the use of Fibonacci heap).
+	But time complexity of Bellman-Ford is O(VE), which is more than Dijkstra.
+	Bellman-Ford is also simpler than Dijkstra and suites well for distributed systems.
+	*/
+
 class Graph_BellmFord
 {
       static class Graph
@@ -51,6 +60,9 @@ class Graph_BellmFord
          }
 	     return s;         
       }
+	      
+/* ************************************************************************************************************************/
+
       
       public void bellmanFord(int src)
       {
