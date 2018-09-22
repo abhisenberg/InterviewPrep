@@ -57,6 +57,8 @@ class Graph_Djikstra_Heap
       }
 	}
    
+/*************************************************************************************************************************/
+	
    static class Heap
 	{
 		private ArrayList<Node> data;
@@ -165,6 +167,8 @@ class Graph_Djikstra_Heap
 		}
 	}
 
+/************************************************************************************************************************/
+	
 	public static void djikstra(Graph g, int src)
 	{
 		boolean vis[] = new boolean[g.v];
@@ -181,7 +185,11 @@ class Graph_Djikstra_Heap
 		min.add(new Node(src, dis[src]));
 
 		for(int i=0; i<g.v; i++)
-		{
+		{	
+			/*
+			Selecting the edge which has least dist. from any already-activated vertex at this
+			point of time.
+			*/
 			int cv = min.pop().name;
 			vis[cv] = true;
 
@@ -189,8 +197,12 @@ class Graph_Djikstra_Heap
 			{
 				int nbr = g.edges[cv].get(j).name;
 				int nbr_w = g.edges[cv].get(j).w;
-
-				if(!vis[nbr] && dis[nbr] > dis[cv] + nbr_w)
+				
+				/*
+				dis[nbr] 	-> Current dist. nbr vertex from the src (infinity in the begining)
+				dis[cv]+nbr_w 	-> Current vertex dis. from src + weight of edge of current edge 
+				*/
+				if(!vis[nbr] && (dis[nbr] > dis[cv] + nbr_w) )
 				{	
 					dis[nbr] = dis[cv] + nbr_w;
 					min.add(new Node(nbr, nbr_w));
@@ -204,6 +216,8 @@ class Graph_Djikstra_Heap
 			po("For vertex " + i + " " + dis[i]);
 		}
 	}
+	
+/***********************************************************************************************************************/
    
 	public static void main(String[] args)
    {
