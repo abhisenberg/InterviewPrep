@@ -247,7 +247,8 @@ of trains that stop.
 		                                              needed at any time 
 		                                           = 3  
 
-***Given an array of integers, write a function that returns true if there is a triplet (a, b, c) that satisfies a2 + b2 = c2, in O(n^2)
+***Given an array of integers, write a function that returns true if
+there is a triplet (a, b, c) that satisfies a2 + b2 = c2, in O(n^2)
 
 	-> The naive approach is to run 3 loops, for a, b and c. O(n^3)
 	-> Better solution is to first sort the array, then square all the terms
@@ -269,3 +270,85 @@ of trains that stop.
 			}
 		}
 	}
+
+***Sliding Window Maximum: Given an array and an integer k, find the maximum
+for each and every contiguous subarray of size k.
+
+	Input:
+	2
+	9 3
+	1 2 3 1 4 5 2 3 6
+	10 4
+	8 5 10 7 9 4 15 12 90 13
+
+	Output:
+	3 3 4 5 5 5 6
+	10 10 10 15 15 90 90
+	
+	O(n) time and O(k) space
+	
+	-> A Deque is used to solve this, deque is used bcz of it's ability to perform operations on both ends
+	of the list (will refer to the deque as list). At any point of time, the list will be of size k or less.
+	
+	Quick rules:
+	-> The list will contain indices of the array elements, not the elements (bcz indices will be needed
+	when we want to remove the out-of-the-window elements.)
+	-> Only those indices will be kept in the list which are present in the current window.
+	-> At all times, the elements corresponding to the indices in the list will be in decreasing order. ie.
+	The indices as well as the values will be in decreasing order.
+	-> Hence the first element of the list is always be the max of the window.
+	-> The algo is designed in such a way that, the incoming new element either becomes the last (by
+	removing the prev. elemtns smaller that it) or the first element in the list.
+	
+	The The algo is given below:
+	
+		/*
+		For first window, the loop will run from 0 -> (k-1). 
+		*/
+		for(int i=0; i<k; i++){
+		   1. Remove all the indices 'j's starting from back end of the list, for which arr[j] < arr[i]
+		   2. Add index 'i' to the back end of the list.
+		}
+
+		/*
+		For subsequenet windows
+		*/
+		for(int i=k; i<n; i++){
+		   1. Print the first element from the list, which is the max of the prev window.
+		   2. Remove all indices from the front end of the list which are now out-of-window
+		   for this new current window.
+		   3. Remove all the indices 'j's starting from back end of the list, for which arr[j] < arr[i]
+		   4. Add index 'i' to the back end of the list.
+		}
+	
+	
+	Code:
+	  	  
+		    Deque<Integer> list = new LinkedList<>();		    
+		    
+		    //For the first window
+		    for(int i=0; i<k; i++){
+		        while(!list.isEmpty() && arr[list.peekLast()] < arr[i]){
+		            list.pollLast();
+		        }
+		        list.addLast(i);
+		    }
+		    
+		    //For rest of the windows
+		    for(int i=k; i<n; i++){
+		        p(arr[list.peekFirst()]+" ");
+		        
+		        while(!list.isEmpty() && list.peekFirst() < (i-k+1)){
+		            list.pollFirst();
+		        }
+		        
+		        while(!list.isEmpty() && arr[list.peekLast()] < arr[i]){
+		            list.pollLast();
+		        }
+		        list.addLast(i);
+		    }
+		    
+		    
+		    po(arr[list.peekFirst()]+" ");
+	
+	
