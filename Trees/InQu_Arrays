@@ -424,5 +424,75 @@ element that appears more than N/2 times.
 		if(freq > n/2) cand is majority
 		else none is.
 		
-		
-		
+***Maximum tip calculator: Seems like DP at first look but it is greedy
+
+Question : Rahul and Ankit are the only two waiters. Restaurant received N orders today.
+	The amount of tips may differ when handled by different waiters, if Rahul takes the ith order, he would be tipped Ai rupees
+	and if Ankit takes this order, the tip would be Bi rupees.
+	In order to maximize the total tip value they decided to distribute the order among themselves.
+	One order will be handled by one person only. Also, due to time constraints Rahul cannot take more than X orders
+	and Ankit cannot take more than Y orders.
+	It is guaranteed that X + Y is greater than or equal to N.
+	Find out the maximum possible amount of total tip money after processing all the orders.
+	
+	Algo :
+	1.    Sort the absolute difference of the value of Ai and Bi( |Ai-Bi|) in decreasing order.
+	2.    Compare Ai and Bi value which one will be greater add that value to the sum.
+	3.    Decrement from the total order taken by Rahul or Ankit in case of order taken from A or B row by the comparison made.
+	4.    If i equals to n goto step 5 else goto step 2.
+	5.    Return sum.
+	
+	Code:
+	
+	static class Pair implements Comparable<Pair>{
+	    int a;
+	    int b; 
+	    
+	    public Pair (int a, int b){
+	        this.a = a;
+	        this.b = b;
+	    }
+	    
+	    public int compareTo(Pair other){
+	        return -1*(Math.abs(this.a - this.b) - Math.abs(other.a - other.b));
+	    }
+	}
+	
+	function main(){
+	..
+	  	    Pair[] arr = new Pair[n];
+		    for(int i=0; i<n; i++){
+		        arr[i] = new Pair(a[i], b[i]);
+		    }
+		    
+		    Arrays.sort(arr);
+		    
+		    int max = 0;
+		    for(int i=0; i<n; i++){
+		        
+		        if(arr[i].a == arr[i].b){
+		            if(x > y){
+		                max += arr[i].a;
+		                x--;
+		            } else {
+		                max += arr[i].b;
+		                y--;
+		            }
+		        }
+		        
+		        else {
+			    if (x > 0 && (arr[i].a > arr[i].b || y == 0)){
+				max += arr[i].a;
+				x--;
+			    }
+			    else if (y > 0 && (arr[i].b > arr[i].a || x == 0)){
+				max += arr[i].b;
+				y--;
+			    }
+		        }
+		    }
+		    
+		    po(max);
+	..
+	}
+	
