@@ -483,7 +483,7 @@ Question : Rahul and Ankit are the only two waiters. Restaurant received N order
 		        else {
 			    if (x > 0 && (arr[i].a > arr[i].b || y == 0)){
 				max += arr[i].a;
-				x--;
+				x--;***
 			    }
 			    else if (y > 0 && (arr[i].b > arr[i].a || x == 0)){
 				max += arr[i].b;
@@ -496,3 +496,35 @@ Question : Rahul and Ankit are the only two waiters. Restaurant received N order
 	..
 	}
 	
+
+***Four Elements sum in array: Given an array of integers, find a combination of four elements in the
+array whose sum is equal to a given value X.
+
+	The naive solution is O(n^4), but we can do it in O(n^3)
+	1) Sort the input array.
+	2) Fix the first element as A[i] where i is from 0 to n–3. After fixing the first element of
+	quadruple, fix the second element as A[j] where j varies from i+1 to n-2.
+	Find remaining two elements in O(n) time, using the mthod of meet-in-the-middle.
+	
+ 		    Arrays.sort(arr);
+		    boolean ans = false;
+		    for(int i=0; i<n-3; i++){
+		        for(int j=i+1; j<n-2; j++){
+		            int k = j+1, l =n-1;
+		            while(k < l){
+		                int csum = arr[i]+arr[j]+arr[k]+arr[l];
+		                if(csum < target){
+		                    k++;
+		                } else if(csum > target){
+		                    l--;
+		                } else {
+		                    ans = true;
+		                    break;
+		                }
+		            }
+		        }
+		    }
+		    if(ans) po(1);
+		    else po(0);
+		    		    
+		    
