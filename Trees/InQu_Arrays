@@ -1,4 +1,5 @@
-***Find if there is a subarray with 0 sum: Given an array of positive and negative numbers, find if there is a subarray (of size at-least one) with 0 sum.
+***Find if there is a subarray with 0 sum: Given an array of positive and negative numbers,
+find if there is a subarray (of size at-least one) with 0 sum.
 
 	Input: {4, 2, -3, 1, 6}
 	Output: true 
@@ -25,12 +26,18 @@
 
 ***Return n'th node from end of linked list:
 
-	-> Use two pointers. Both pointers are initialized to head. First pointers moves forwards till the count becomes n from the front. Then the other pointer and the first pointer start moving simultaneously. This keeps on going till the first pointer becomes null. At this point the second pointer will be at the desired node.
+	-> Use two pointers. Both pointers are initialized to head.
+	First pointers moves forwards till the count becomes n from the front.
+	Then the other pointer and the first pointer start moving simultaneously.
+	This keeps on going till the first pointer becomes null. At this point the
+	second pointer will be at the desired node.
 
 
 
 ***Get the intersection point of two Linked Lists.
-There are two singly linked lists in a system. By some programming error, the end node of one of the linked list got linked to the second list, forming a Y shaped list. Write a program to get the point where two linked list merge.
+There are two singly linked lists in a system. By some programming error,
+the end node of one of the linked list got linked to the second list,
+forming a Y shaped list. Write a program to get the point where two linked list merge.
 
 	Given LL is like this: 3 -- 6 -- 9 -- 15 -- 30
 							  10 -- 11 -- /
@@ -40,8 +47,11 @@ There are two singly linked lists in a system. By some programming error, the en
 		1) Get count of the nodes in the first list, let count be c1.
 		2) Get count of the nodes in the second list, let count be c2.
 		3) Get the difference of counts d = abs(c1 – c2)
-		4) Now traverse the bigger list from the first node till d nodes so that from here onwards both the lists have equal no of nodes.
-		5) Then we can traverse both the lists in parallel till we come across a common node. (Note that getting a common node is done by comparing the address of the nodes)		
+		4) Now traverse the bigger list from the first node till d nodes
+		so that from here onwards both the lists have equal no of nodes.
+		5) Then we can traverse both the lists in parallel till we come
+		across a common node.
+		(Note that getting a common node is done by comparing the address of the nodes)		
 
 
 
@@ -62,7 +72,10 @@ checks whether a given Linked List contains loop and if loop is present then rem
 
 ***Count inversions in array:
 Use merge sort and keep a variable 'inv_cnt' that will store the value of numbers that need to be swapped. 
-This is done in the 'mergeTwoSortedArrays()' where we merge the 2 sorted arrays. Suppose 'i' is the counter for left array and 'j' is the counter for right array, then if arr[i] > arr[j], then all the further elements in left side upto 'mid' are > arr[j], hence they all need to be swapped. Therefore, when we encounter arr[i] > arr[j], increment inv_cnt by (mid - i);
+This is done in the 'mergeTwoSortedArrays()' where we merge the 2 sorted arrays.
+Suppose 'i' is the counter for left array and 'j' is the counter for right array,
+then if arr[i] > arr[j], then all the further elements in left side upto 'mid' are > arr[j],
+hence they all need to be swapped. Therefore, when we encounter arr[i] > arr[j], increment inv_cnt by (mid - i);
 
 Pseudo code is as follows:
 	
@@ -90,7 +103,8 @@ Pseudo code is as follows:
 		...
 	}
 
-***Kadanes algo: Given an array containing both negative and positive integers. Find the contiguous sub-array with maximum sum.
+***Kadanes algo: Given an array containing both negative and positive integers.
+Find the contiguous sub-array with maximum sum.
 
 	int maxSubArraySum(int a[], int size)
 	{
@@ -106,7 +120,8 @@ Pseudo code is as follows:
 	}
 
 ***Sort an array of 0s, 1s, 2s
-	Take three pointers: z (denotes the position of zero), i (current element), t (denotes the position of two)
+	Take three pointers: z (denotes the position of zero),
+	i (current element), t (denotes the position of two)
 
 	z = 0, i = 0, t = arr.length-1
 	while(i <= t){
@@ -287,18 +302,19 @@ for each and every contiguous subarray of size k.
 	
 	O(n) time and O(k) space
 	
-	-> A Deque is used to solve this, deque is used bcz of it's ability to perform operations on both ends
-	of the list (will refer to the deque as list). At any point of time, the list will be of size k or less.
+	-> A Deque is used to solve this, deque is used bcz of it's ability
+	to perform operations on both ends of the list (will refer to the deque as list).
+	At any point of time, the list will be of size k or less.
 	
 	Quick rules:
-	-> The list will contain indices of the array elements, not the elements (bcz indices will be needed
-	when we want to remove the out-of-the-window elements.)
+	-> The list will contain indices of the array elements, not the elements
+	  (bcz indices will be needed when we want to remove the out-of-the-window elements.)
 	-> Only those indices will be kept in the list which are present in the current window.
 	-> At all times, the elements corresponding to the indices in the list will be in decreasing order. ie.
-	The indices as well as the values will be in decreasing order.
+	  The indices as well as the values will be in decreasing order.
 	-> Hence the first element of the list is always be the max of the window.
 	-> The algo is designed in such a way that, the incoming new element either becomes the last (by
-	removing the prev. elemtns smaller that it) or the first element in the list.
+	  removing the prev. elemtns smaller that it) or the first element in the list.
 	
 	The The algo is given below:
 	
@@ -306,7 +322,8 @@ for each and every contiguous subarray of size k.
 		For first window, the loop will run from 0 -> (k-1). 
 		*/
 		for(int i=0; i<k; i++){
-		   1. Remove all the indices 'j's starting from back end of the list, for which arr[j] < arr[i]
+		   1. Remove all the indices 'j's starting from back end of the list,
+		     for which arr[j] < arr[i]
 		   2. Add index 'i' to the back end of the list.
 		}
 
@@ -316,8 +333,9 @@ for each and every contiguous subarray of size k.
 		for(int i=k; i<n; i++){
 		   1. Print the first element from the list, which is the max of the prev window.
 		   2. Remove all indices from the front end of the list which are now out-of-window
-		   for this new current window.
-		   3. Remove all the indices 'j's starting from back end of the list, for which arr[j] < arr[i]
+		     for this new current window.
+		   3. Remove all the indices 'j's starting from back end of the list,
+		     for which arr[j] < arr[i]
 		   4. Add index 'i' to the back end of the list.
 		}
 	
