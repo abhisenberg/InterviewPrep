@@ -527,4 +527,44 @@ array whose sum is equal to a given value X.
 		    if(ans) po(1);
 		    else po(0);
 		    		    
-		    
+***Min. element in sorted circular array: A sorted array A[ ] with distinct elements is rotated at
+some unknown point, the task is to find the minimum element in it.
+	Input: 4 5 1 2 3
+	Output: 1
+	Time complexity: O(logn)
+	
+	-> There are 4 cases: 
+	1. low == high : arr[low] is the required answer, since only this element is remaining in the range
+	2. We find mid, next, prev
+	   Only the minimum element has the property that next and prev is less than it.
+	   Hence we check if the current ele (mid) is less than both the next and prev.
+	   arr[mid] <= arr[prev] && arr[mid] <= arr[next]
+	3. If the arr[mid] ele is not the minimum, then the min either lies on the right-subarray or the left subarray
+	   To decide in which subarray it lies,
+	   arr[mid] <= arr[high]: Then the min lies in left side, hence for further iterations: high = mid-1
+	4. arr[mid] >= arr[low]: The min lies in the right side, for further iterations: low = mid+1
+	
+	Code:
+	int func(int[] arr, int n){
+	    int low = 0, high = n-1;
+	    
+	    while(low <= high){
+	        
+	        if(low == high)
+	            return arr[low];
+	        
+	        int mid = (low+high)/2;
+	        int next = (mid+1)%n;
+	        int prev = (mid-1+n)%n;
+	        
+	        if(arr[mid] <= arr[next] && arr[mid] <= arr[prev])
+	            return arr[mid];
+	        
+	        else if(arr[mid] <= arr[high])
+	            high = mid-1;
+	            
+	        else if(arr[mid] >= arr[low])
+	            low = mid+1;
+	    }
+	
+	
