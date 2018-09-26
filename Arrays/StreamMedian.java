@@ -3,6 +3,27 @@ import java.io.*;
 
 public class Template {
 
+	/*
+	To find continuous median from a stream of integers, the following algo is used:
+	
+	-> Make two heaps, a max-heap to store the no.s less than the current median
+	   and a min-heap to store the no.s greater than the current median.
+	   Max-heap is called Lowers and min-heap is called Highers.
+	-> One by one, insert the numbers in any one of the two heaps, by comparing it with
+	   the top element of both heaps (max of lowers or min of highers).
+	-> For ex, if it is less than max of lowers, then it belongs to the lowers itself, else highers.
+	-> The second step is to rebalance the heaps. Which means that if the size difference of 
+	   both the heaps is > 1, then one element needs to be moved from the bigger sized heap
+	   to the smaller sized heap.
+	-> Third step is to find out the median. The median is found as follows:
+	   If the size of both the heaps is equal, then median is the average of two numbers
+	   i.e. the max of lowers and the min of highers
+	   (lowers.peek()+highers.peek())/2
+	   
+	   If the size is unequal, then the median is the top element of that heap which has
+	   bigger size.
+	*/
+	
 	public static void main(String[] args){
 		ShortScan sc = new ShortScan();
 		int n = sc.ni();
@@ -23,9 +44,6 @@ public class Template {
 		    addElement(x, highers, lowers);
 		    rebalanceHeaps(highers, lowers);
 		    po(getMedian(highers, lowers));
-		  //  po(highers);
-		  //  po(lowers);
-		  //  po(" ");
 		}
 	}
 	
