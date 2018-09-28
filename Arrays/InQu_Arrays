@@ -567,4 +567,25 @@ some unknown point, the task is to find the minimum element in it.
 	            low = mid+1;
 	    }
 	
+***Largest number formed from array of numbers: Given a list of non negative integers,
+arrange them in such a manner that they form the largest number possible.
+
+	Input:
+	3 30 34 5 9
+	54 546 548 60
+
+	Output:
+	9534330
+	6054854654
+	
+	Since normal sorting of the numbers won't do the required job, we have to sort them in a specific way.
+	
+	Code:
+	static class Max implements Comparator<String> {
+	    public int compare(String x, String y){
+	        String a = x+y;
+	        String b = y+x;
+	        return b.compareTo(a);
+	    }
+	}
 	
