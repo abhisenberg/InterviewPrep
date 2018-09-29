@@ -1,0 +1,7 @@
+-> To get the rightmost set bit of a number n, 
+    set_bit = n & ~(n-1)
+    Now set_bit will have only the rightmost set bit.
+    ex: n = 14
+    set_bit = (1110) & ~(1101) = 0010
+    Here the set_bit has only the rightmost set bit.
+    
