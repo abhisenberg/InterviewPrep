@@ -589,3 +589,41 @@ arrange them in such a manner that they form the largest number possible.
 	    }
 	}
 	
+***Given an array in which all numbers except two are repeated once. Find the two non-repeating numbers in most optimal way.
+	Idea: To use XOR.
+	
+	Algo:
+	Let us see an example.
+	   arr[] = {2, 4, 7, 9, 2, 4}
+	1) Get the XOR of all the elements.
+	     xor = 2^4^7^9^2^4 = 14 (1110)
+	2) Get a number which has only one set bit of the xor.   
+	   Since we can easily get the rightmost set bit, let us use it.
+	     set_bit_no = xor & ~(xor-1) = (1110) & ~(1101) = 0010
+	   Now set_bit_no will have only set as rightmost set bit of xor.
+	3) Now divide the elements in two sets and do xor of         
+	   elements in each set, and we get the non-repeating 
+	   elements 7 and 9. Please see implementation for this   
+	   step.
+	   
+		int[] arr = sc.narr(n);
+		    
+		int xor = 0;
+		for(int x: arr){
+		     xor = xor ^ x;
+		}
+		    
+		int rightSet = xor & ~(xor-1);
+		 /* Now divide elements in two sets by comparing rightmost set 
+   		bit of xor with bit at same position in each element. */
+		int a = 0, b = 0;
+		for(int x: arr){
+                	if((x & rightSet) == 0){
+                    	    a = a ^ x;
+                	}
+			else{
+			    b = b ^ x;
+			}
+		}
+		
+		    
