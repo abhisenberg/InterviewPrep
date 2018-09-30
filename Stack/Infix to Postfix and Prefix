@@ -1,4 +1,4 @@
-Convert the below expression to Postfix expression (manual method):
+********INFIX TO POSTFIX***********
 (A + B ^ C ) * D + E
 
 Step 1 :
@@ -34,3 +34,19 @@ Final Postfix Expression :
 = Y D * E +          [Put Value of Z]
 = A X + D * E +      [Put Value of Y]
 = A B C ^ + D * E +  [Put Value of X] 
+
+
+**********INFIX TO PREFIX***********
+3 Steps:
+  -> Reverse the expression
+  -> Find postfix
+  -> Reverse the postfix
+  
+Example: Convert this infix expression to postfix
+(A*B)+C
+
+  -> Reverse the expression: C+(B*A)
+  -> Find postfix of this expression: CBA*+
+  -> Reverse the postfix: +*ABC
+  
+  This is the prefix expression: +*ABC
