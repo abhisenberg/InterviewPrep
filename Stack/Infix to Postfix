@@ -1,0 +1,36 @@
+Convert the below expression to Postfix expression (manual method):
+(A + B ^ C ) * D + E
+
+Step 1 :
+Expression Wrapped in Round Bracket Should be Evaluated Firstly.
+Again Bracket Contain Two Operators – Addition(+) and Raise to(^) .
+Out of these two ‘^’ Operator has Higher Priority.
+So “B^C” should be Evaluated First
+(A + B ^ C ) * D + E
+= (A + B C ^ ) * D + E    [B^C Converted Into BC^]
+Now [ B C ^ ] is Converted Expression So Consider it as X
+= (A + X ) * D + E    [X = BC^]
+
+Step 2 :
+Evaluate A + X
+(A + X ) * D + E
+= (A X + ) * D + E    [A+X Converted Into AX+]
+Now [ A X + ] is Converted Expression So Consider it as Y
+= Y * D + E    [Y = AX+]
+
+Step 3 :
+Evaluate Y * D
+Y * D + E
+= Y D * + E    [Y*D Converted Into YD*]
+Now [Y D * ] is Converted Expression So Consider it as Z
+= Z + E    [Z = YD*]
+
+Step 4 :
+Evaluate Z + E
+Z + E
+= Z E +    [Z+E Converted Into ZE+]
+Final Postfix Expression : 
+= Z E +    
+= Y D * E +          [Put Value of Z]
+= A X + D * E +      [Put Value of Y]
+= A B C ^ + D * E +  [Put Value of X] 
