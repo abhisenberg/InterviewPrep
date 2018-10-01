@@ -1,0 +1,22 @@
+The idea is the following. Traverse the array both from right and left while keeping track of maxLeft and maxRight. 
+
+
+static int rainTrap(int[] arr){
+	    int a = 0, b = arr.length-1;
+	    int maxLeft = 0, maxRight = 0, ans = 0;
+	    
+	    while(a <= b){
+	        maxLeft = Math.max(maxLeft, arr[a]);
+	        maxRight = Math.max(maxRight, arr[b]);
+	        
+	        if(maxLeft <= maxRight){
+	            ans += maxLeft - arr[a];
+	            a++;
+	        } else {
+	            ans += maxRight - arr[b];
+	            b--;
+	        }
+	    }
+	    
+	    return ans;
+	}
