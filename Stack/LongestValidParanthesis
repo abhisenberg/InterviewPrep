@@ -1,0 +1,46 @@
+Given a string consisting of opening and closing parenthesis, find length of the longest valid parenthesis substring.
+
+Examples:
+
+Input : ((()
+Output : 2
+Explanation : ()
+
+Input: )()())
+Output : 4
+Explanation: ()()
+
+Input:  ()(()))))
+Output: 6
+Explanation:  ()(())
+
+
+-> We use a stack and in it, we store the index of the elements. If for current index i, a closing bracket comes and the top of the 
+stack is an opening bracket, we pop the stack (not pushing the closing bracket, thus removing the valid paranthesis series
+from the stack),
+and the length of the current balanced paranthesis is 'i' minus the index of the now top-most element in stack.
+If the current element is an opening bracket, we push it's index in the stack.
+
+We first push -1 to the stack so that the first balanced paranthesis series can give correct answer.
+For ex- in string ()
+The pushed indices are -1, 0, and then when 1 comes, it will pop out 0, and the max length will be 1 - (-1) = 2.
+
+static int longestVP(String str){
+	    Stack<Integer> stack = new Stack<>();
+	    stack.push(-1);
+	    
+	    int maxLength = 0;
+	    for(int i=0; i<str.length(); i++){
+	        char curr = str.charAt(i);
+	        
+	        if(curr == ')' && !stack.isEmpty() && stack.peek() != -1
+	                && str.charAt(stack.peek()) == '('){
+	            stack.pop();
+	            maxLength = Math.max(maxLength, i-stack.peek());
+	        } else {
+	            stack.push(i);
+	        }
+	    }
+	    
+	    return maxLength;
+	}
