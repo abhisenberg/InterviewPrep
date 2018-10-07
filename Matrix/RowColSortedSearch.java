@@ -2,6 +2,21 @@
 Given an n x n matrix, where every row and column is sorted in increasing order. 
 Given a number k, search for this number in the matrix.
 The expected complexity is O(n)
+
+Input : mat[4][4] = { {10, 20, 30, 40},
+                      {15, 25, 35, 45},
+                      {27, 29, 37, 48},
+                      {32, 33, 39, 50}};
+              x = 29
+Output : Found at (2, 1)
+
+Input : mat[4][4] = { {10, 20, 30, 40},
+                      {15, 25, 35, 45},
+                      {27, 29, 37, 48},
+                      {32, 33, 39, 50}};
+              x = 100
+Output : Element not found
+
 */
 
 /*
