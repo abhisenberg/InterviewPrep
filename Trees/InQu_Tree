@@ -139,8 +139,8 @@ of left and right subtrees is not greater than 1.
 			if(node == null)
 				return 0
 
-			int lh = isBal(node.left)+1
-			int rh = isBal(node.right)+1
+			int lh = isBal(node.left)
+			int rh = isBal(node.right)
 
 			if(lh != -1 && rh != -1 && abs(lh-rh) <= 1)
 				return max(lh, rh)+1
