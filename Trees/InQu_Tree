@@ -152,3 +152,40 @@ of left and right subtrees is not greater than 1.
 		if the final returned value is -1 then it is not balanced, otherwise
 		it is.
 		
+***Print the tree in a vertical fashion.
+		1
+	      /   \
+	    2       3
+	  /   \   /   \ 
+	 4     5 6     7
+	 
+	Draw vetical lines and then print them according to the lines from left to right.
+	Output:
+		4
+		2
+		5 1 6
+		3
+		7
+	
+	Algo:
+	We will keep one variable horizontal distance (dis) which will keep track of
+	horizontal distance of each node from root node.
+	When we go right, we do dis+1. When we go left, we do dis-1.
+	Then we use a hashmap to store the nodes according to their distances.
+	
+	Code:
+	private void printTreeInVerticalOrder(Node rootNode, TreeMap<Integer, String> map, int dis) {
+		  if(rootNode==null){
+		   return;
+		  }
+
+		  if(map.get(hd)!=null){
+		   map.put(hd, map.get(hd)+","+rootNode.getData());
+		  }else{
+		   map.put(hd, String.valueOf(rootNode.getData()));
+		  }
+
+		  printTreeInVerticalOrder(rootNode.getLeft(), map, dis-1);
+		  printTreeInVerticalOrder(rootNode.getRight(), map, dis+1);
+	 }
+	
